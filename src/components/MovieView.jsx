@@ -24,6 +24,7 @@ const MovieView = () => {
     }
     if (movieDetails) {
       let posterPath = "image error";
+      const backdropUrl = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
 
       if (movieDetails.poster_path) {
         posterPath = `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`;
@@ -31,7 +32,7 @@ const MovieView = () => {
 
       return (
         <div>
-          <Hero text={movieDetails.original_title} />
+          <Hero text={movieDetails.original_title} backdrop={backdropUrl} />
           <div className="container my-5">
             <div className="row">
               <div className="col-md-3">
@@ -43,7 +44,11 @@ const MovieView = () => {
               </div>
               <div className="col-md-9">
                 <h2>{movieDetails.original_title}</h2>
-                <p className="lead">{movieDetails.overview}</p>
+                {movieDetails.overview ? (
+                  <p className="lead">{movieDetails.overview}</p>
+                ) : (
+                  <p className="lead">"No data"</p>
+                )}
               </div>
             </div>
           </div>
